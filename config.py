@@ -1,3 +1,0 @@
-### new_test
-apiKey = "LpG5vSL6RCMX575b8EpBrGxI2mFdArw6qRpRFKcCn9fIV9UePg3GQnNRIlfsXxdW"
-apiSecurity="cInQwLcaVfWhp4oUHI7j1qLKzWT3t7JzhNxv9IPJOwjDOfdUMdziptW7DV6ybZF3"
