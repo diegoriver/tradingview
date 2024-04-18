@@ -2,12 +2,14 @@
 import pandas as pd
 from generate_history_data_microservice import create_data
 from predictions import generar_analisis
+from assets import financial_asset_info
 import os
 import time
+from datetime import datetime
 import streamlit as st
 
 from tensorflow.keras.models import load_model
-model_final = load_model('modelos_redes/model_1-A_binance_1m_5x1_0.5.h5')
+model_final = load_model('modelos_redes/model_3-A_binance_1m_5x1_2.0.h5')
 
 
 
@@ -36,15 +38,11 @@ if __name__== "__main__":
  
         t_inicial = time.time()
 
-        ### se crea la data inicial (solo se necesita para la prediccion con red neuronal)
-        # num_data = 5 # numero de velas para crear historial
-        # create_data(num_data, timer, interval_time)
-
         ### evaluation
         for i in range(0,num_predictions):
                     
             num_data = 1  # se crea nuevo dato para analizar 
-            create_data(num_data, timer, interval_time)
+            create_data(num_data, timer, interval_time,financial_asset_info)
 
             times,nombres_acciones,sumary,moving_averages,oscillators,indicators = generar_analisis(model_final,interval_time)
 
@@ -70,12 +68,17 @@ if __name__== "__main__":
 
 
             ###visualization
-            st.success(f"PREDICTION: {i+1} - TEMPORALIDAD: {interval_time}")
+            st.success(f"PREDICTION: {i+1} - TEMPORALIDAD: {interval_time} --- {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
             df1 = pd.DataFrame(
                 data,
                 columns=["times","acciones","sumary","moving_averages","oscillators","indicators"]
             )
             st.dataframe(df1)
+
+
+            ### Espera n segundos antes del próximo ciclo
+            mult = int(interval_time.replace("m", ""))
+            time.sleep(time_seg*mult) ### falta hacer multiplicador por interval_time
 
 
         t_final = time.time()
