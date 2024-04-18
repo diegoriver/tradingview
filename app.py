@@ -42,7 +42,7 @@ if __name__== "__main__":
         for i in range(0,num_predictions):
                     
             num_data = 1  # se crea nuevo dato para analizar 
-            create_data(num_data, timer, interval_time,financial_asset_info)
+            create_data(num_data, interval_time,financial_asset_info)
 
             times,nombres_acciones,sumary,moving_averages,oscillators,indicators = generar_analisis(model_final,interval_time)
 
@@ -78,7 +78,7 @@ if __name__== "__main__":
 
             ### Espera n segundos antes del próximo ciclo
             mult = int(interval_time.replace("m", ""))
-            time.sleep(time_seg*mult) ### falta hacer multiplicador por interval_time
+            time.sleep(timer*mult) ### falta hacer multiplicador por interval_time
 
 
         t_final = time.time()

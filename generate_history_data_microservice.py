@@ -7,7 +7,7 @@ from datetime import datetime
 
 
 
-def create_data(num_data, time_seg, interval_time, financial_asset_info):
+def create_data(num_data, interval_time, financial_asset_info):
     for i in range(num_data):
         for info in financial_asset_info:
             for symbol in info["symbol"]:
