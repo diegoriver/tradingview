@@ -74,7 +74,14 @@ if __name__== "__main__":
                 # columns=["time","accion","sumary","moving_averages","oscillators","indicators"]
                 columns=["time","acciones","sumary","moving_averages","oscillators"]
             )
-            st.dataframe(df)
+
+            df_filtered = df[
+                (df['sumary'].str.lower() == 'buy') &
+                (df['moving_averages'].str.lower() == 'buy') &
+                (df['oscillators'].str.lower() == 'buy')
+            ]
+            
+            st.dataframe(df_filtered)
             
             ### Espera n segundos antes del próximo ciclo
             mult = int(interval_time.replace("m", ""))
