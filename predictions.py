@@ -54,6 +54,7 @@ def prediction(model_final, X_data):
 def generar_analisis(model_final,interval_time):
     # Usa os.listdir para obtener los nombres de todos los archivos en la carpeta
     archivos = os.listdir('data_history')
+    # nombres_cortados = [nombre.split('_')[-1].replace('.json', '') for nombre in archivos]
     nombres_filtrados = [nom for nom in archivos if interval_time in nom]
 
     nombres = []
@@ -78,30 +79,31 @@ def generar_analisis(model_final,interval_time):
         moving_averages_recomendation = data[str(last_five_keys[-1])]['moving_averages']['RECOMMENDATION']
         oscillators_recomendation = data[str(last_five_keys[-1])]['oscillators']['RECOMMENDATION']
         
-        try:
-            indicators = []
-            # Imprimir los últimos 5 elementos
-            for key in last_five_keys:
-                indicators.append( [data[str(key)]['indicators']['open'],\
-                                data[str(key)]['indicators']['high'],\
-                                data[str(key)]['indicators']['low'],\
-                                data[str(key)]['indicators']['close'] ]
-                )
-            indicators = np.array(indicators)
-            indicators = indicators[::-1] # se invierte el orden de la filas para que queden los valores actuales al principio}
-            tensores = tensor_flags(indicators)
-            X_data = data_train(tensores)
+        # try:
+        #     indicators = []
+        #     # Imprimir los últimos 5 elementos
+        #     for key in last_five_keys:
+        #         indicators.append( [data[str(key)]['indicators']['open'],\
+        #                         data[str(key)]['indicators']['high'],\
+        #                         data[str(key)]['indicators']['low'],\
+        #                         data[str(key)]['indicators']['close'] ]
+        #         )
+        #     indicators = np.array(indicators)
+        #     indicators = indicators[::-1] # se invierte el orden de la filas para que queden los valores actuales al principio}
+        #     tensores = tensor_flags(indicators)
+        #     X_data = data_train(tensores)
 
-            indicators_recomendation = prediction(model_final, X_data) ### resultado de la prediccion
-        except:
-            indicators_recomendation = "---"
+        #     indicators_recomendation = prediction(model_final, X_data) ### resultado de la prediccion
+        # except:
+        #     indicators_recomendation = "---"
 
         nombres.append(nombre.replace("results_", "").replace(f"_{interval_time}.json", ""))
         sumary.append(sumary_recomendation)
         moving_averages.append(moving_averages_recomendation)
         oscillators.append(oscillators_recomendation)
-        indicators_final.append(' '.join(indicators_recomendation))
+        # indicators_final.append(' '.join(indicators_recomendation))
 
         times.append(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-
-    return times,nombres,sumary,moving_averages,oscillators,indicators_final
+        # print(times)
+        # print(nombres)
+    return times,nombres,sumary,moving_averages,oscillators # ,indicators_final

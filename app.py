@@ -41,22 +41,22 @@ if __name__== "__main__":
         ### evaluation
         for i in range(0,num_predictions):
                     
-            num_data = 1  # se crea nuevo dato para analizar 
-            create_data(num_data, interval_time,financial_asset_info)
+            # num_data = 1  # se crea nuevo dato para analizar 
+            # create_data(num_data, interval_time,financial_asset_info)
 
-            times,nombres_acciones,sumary,moving_averages,oscillators,indicators = generar_analisis(model_final,interval_time)
+            times,nombres,sumary,moving_averages,oscillators = generar_analisis(model_final,interval_time)
 
             data = {
-                'time': str(times),
-                'acciones': nombres_acciones,
+                'time': times,
+                'acciones': nombres,
                 'sumary': sumary,
                 'moving_averages': moving_averages,
-                'oscillators': oscillators,
-                'indicators': indicators
+                'oscillators': oscillators
+                # 'indicators': indicators
             }
 
             df = pd.DataFrame(data)
-            
+
             folder = 'results_history'
             file = f'results_{interval_time}.xlsx'
             path = os.path.join(folder, file)
@@ -69,16 +69,17 @@ if __name__== "__main__":
 
             ###visualization
             st.success(f"PREDICTION: {i+1} - TEMPORALIDAD: {interval_time} --- {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-            df1 = pd.DataFrame(
+            df = pd.DataFrame(
                 data,
-                columns=["times","acciones","sumary","moving_averages","oscillators","indicators"]
+                # columns=["time","accion","sumary","moving_averages","oscillators","indicators"]
+                columns=["time","acciones","sumary","moving_averages","oscillators"]
             )
-            st.dataframe(df1)
-
-
+            st.dataframe(df)
+            
             ### Espera n segundos antes del próximo ciclo
             mult = int(interval_time.replace("m", ""))
             time.sleep(timer*mult) ### falta hacer multiplicador por interval_time
+
 
 
         t_final = time.time()
