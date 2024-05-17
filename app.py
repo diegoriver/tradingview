@@ -16,7 +16,7 @@ model_final = load_model('modelos_redes/model_3-A_binance_1m_5x1_2.0.h5')
 if __name__== "__main__":
     # Título
     html_temp = """
-    <h1 style="color:#181082;text-align:center;">SISTEMA DE PREDICCION PARA TRADING </h1>
+    <h1 style="color:#181082;text-align:center;">SPT</h1>
     </div>
     """
     st.markdown(html_temp, unsafe_allow_html=True)
@@ -76,17 +76,16 @@ if __name__== "__main__":
             )
 
             df_filtered = df[
-                (df['sumary'].str.lower() == 'buy') &
-                (df['moving_averages'].str.lower() == 'buy') &
-                (df['oscillators'].str.lower() == 'buy')
+                (df['sumary'].str.lower().str.contains('buy')) &
+                (df['moving_averages'].str.lower().str.contains('buy')) &
+                (df['oscillators'].str.lower().str.contains('buy'))
             ]
-            
+
             st.dataframe(df_filtered)
             
             ### Espera n segundos antes del próximo ciclo
             mult = int(interval_time.replace("m", ""))
             time.sleep(timer*mult) ### falta hacer multiplicador por interval_time
-
 
 
         t_final = time.time()
