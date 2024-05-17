@@ -54,8 +54,7 @@ def prediction(model_final, X_data):
 def generar_analisis(model_final,interval_time):
     # Usa os.listdir para obtener los nombres de todos los archivos en la carpeta
     archivos = os.listdir('data_history')
-    # nombres_cortados = [nombre.split('_')[-1].replace('.json', '') for nombre in archivos]
-    nombres_filtrados = [nom for nom in archivos if interval_time in nom]
+    nombres_filtrados = [nom for nom in archivos if nom.endswith(f'_{interval_time}.json')]
 
     nombres = []
     sumary =[]
