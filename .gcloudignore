@@ -1,0 +1,8 @@
+__pycache__
+.venv
+app.yaml
+deployment.yaml
+load_container_GCP.md
+test.ipynb
+.gitignore
+docker-compose.yml

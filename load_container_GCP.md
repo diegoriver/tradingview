@@ -32,16 +32,28 @@ gcloud iam service-accounts list --project tradingview3
 # desactivar un servicio
 gcloud iam service-accounts disable 743927460834-compute@developer.gserviceaccount.com --project tradingview3
 
+gcloud iam service-accounts disable tradingview@tradingview3.iam.gserviceaccount.com --project tradingview3
+
+
 # activar un servicio
 gcloud services enable 743927460834-compute@developer.gserviceaccount.com--project tradingview3
 
 
 # eliminar un servicio
 
-gcloud iam service-accounts delete 743927460834-compute@developer.gserviceaccount.com --project tradingview3
-
+gcloud iam service-accounts delete tradingview@tradingview3.iam.gserviceaccount.com --project tradingview3
 
 # eliminar un proyecto
 gcloud projects delete fast-gateway-416821
+
+
+# subir una imgen de docker a GCP
+## Etiquetar la imagen
+docker tag [NOMBRE_IMAGEN] gcr.io/[TU_PROYECTO_ID]/[NOMBRE_IMAGEN]
+
+## Subir la imagen
+docker push gcr.io/[TU_PROYECTO_ID]/[NOMBRE_IMAGEN]
+
+
 
 
