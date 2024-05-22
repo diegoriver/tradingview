@@ -2,14 +2,14 @@
 
 financial_asset_info = [
     {
-        "symbol": ["NVDA", "AAPL", "GOOG", "META", "MSFT", "TSLA", "AMZN"],
+        "symbol": ["NVDA", "AAPL", "GOOG", "META", "MSFT", "TSLA", "AMZN", "MU"],
         "screener": "america",
         "exchange": "NASDAQ"
     },
     {
-        "symbol": ["DOCN","BABA","UNH"],
+        "symbol": ["DOCN","BABA","UNH", "IBM", "C", "JPM", "CL", "GE", "AXP"],
         "screener": "america",
-        "exchange": "nyse"
+        "exchange": "NYSE"
     },
     {
         "symbol": ["SPY", "VOO"],

@@ -23,8 +23,10 @@ if __name__== "__main__":
     
 
     # Lecctura de datos
-    temp_formulario = st.radio( "Escoja la temporalidad de la operación:",('1m', '5m', '15m'))
-    numero_predicciones = st.number_input('Ingrese el número de prediciones', min_value=1, max_value=100000, value=3,step=1)
+    temp_formulario = st.radio( "Escoja la temporalidad de la operación:",('1m','5m','10m','15m','30m'))
+    numero_predicciones = st.number_input('Ingrese el número de prediciones', min_value=1, max_value=100000, value=10,step=1)
+
+    option_show = st.radio( "Escoja la opción a mostrar (todos o las de comprar):",('all','to buy'))
 
 
     num_predictions = numero_predicciones
@@ -40,10 +42,11 @@ if __name__== "__main__":
 
         ### evaluation
         for i in range(0,num_predictions):
-                    
-            # num_data = 1  # se crea nuevo dato para analizar 
-            # create_data(num_data, interval_time,financial_asset_info)
+            # obtencion de data        
+            num_data = 1  # se crea nuevo dato para analizar 
+            create_data(num_data, interval_time,financial_asset_info)
 
+            # analisis data
             times,nombres,sumary,moving_averages,oscillators = generar_analisis(model_final,interval_time)
 
             data = {
@@ -80,9 +83,11 @@ if __name__== "__main__":
                 (df['moving_averages'].str.lower().str.contains('buy')) &
                 (df['oscillators'].str.lower().str.contains('buy'))
             ]
+            if option_show == "all":
+                st.dataframe(df)
+            else:
+                st.dataframe(df_filtered)
 
-            st.dataframe(df_filtered)
-            
             ### Espera n segundos antes del próximo ciclo
             mult = int(interval_time.replace("m", ""))
             time.sleep(timer*mult) ### falta hacer multiplicador por interval_time
