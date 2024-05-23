@@ -23,7 +23,7 @@ if __name__== "__main__":
     
 
     # Lecctura de datos
-    temp_formulario = st.radio( "Escoja la temporalidad de la operación:",('1m','5m','10m','15m','30m'))
+    temp_formulario = st.radio( "Escoja la temporalidad:",('1m','5m','10m','15m','30m'))
     numero_predicciones = st.number_input('Ingrese el número de prediciones', min_value=1, max_value=100000, value=10,step=1)
 
     option_show = st.radio( "Escoja la opción a mostrar (todos o las de comprar):",('all','to buy'))
