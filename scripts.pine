@@ -120,13 +120,12 @@ En resumen, este script crea un indicador visual que muestra señales de cruce d
 
 // ESTRATEGIA PARA INTRADAY
 
-
 //@version=4
-study("Custom MA Crossover Indicator with 100 Point Target", shorttitle="MA Crossover w/ 100pt Target", overlay=true)
+study("Custom MA Crossover Indicator INTRADAY with 100 Point Target", shorttitle="MA Crossover INTRADAY w/ 100pt Target", overlay=true)
 
 // User-defined input for moving averages
-shortMA = input(10, minval=1, title="Short MA Period")
-longMA = input(100, minval=1, title="Long MA Period")
+shortMA = input(5, minval=1, title="Short MA Period")
+longMA = input(20, minval=1, title="Long MA Period")
 target_1 = input(50, minval=1, title="Target_1")
 target_2 = input(100, minval=1, title="Target_2")
 
@@ -203,4 +202,3 @@ if (not na(sellEntryPrice_1) and close <= sellEntryPrice_1 - target_1)
 if (not na(sellEntryPrice_2) and close <= sellEntryPrice_2 - target_2)
     label.new(bar_index, low, text=tostring(target_2), style=label.style_label_up, color=color.red, textcolor=color.white, yloc=yloc.belowbar)
     sellEntryPrice_2 := na // Reset after label is created
- 
