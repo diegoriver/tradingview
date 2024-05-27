@@ -203,3 +203,4 @@ if (not na(sellEntryPrice_1) and close <= sellEntryPrice_1 - target_1)
 if (not na(sellEntryPrice_2) and close <= sellEntryPrice_2 - target_2)
     label.new(bar_index, low, text=tostring(target_2), style=label.style_label_up, color=color.red, textcolor=color.white, yloc=yloc.belowbar)
     sellEntryPrice_2 := na // Reset after label is created
+ 
